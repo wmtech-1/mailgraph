@@ -2,11 +2,13 @@
       -----------------------------------------------------
       mailgraph - a RRDtool frontend for Postfix Statistics
       by David Schweikert <david@schweikert.ch>
+      adapted by WMTech
       -----------------------------------------------------
 
 mailgraph is a very simple mail statistics RRDtool frontend for Postfix
 that produces daily, weekly, monthly and yearly graphs of received/sent 
-and bounced/rejected mail (SMTP traffic).
+and bounced/rejected mail (SMTP traffic). Now compatible with Postfix 3.x
+and OpenDKIM, OpenDMARC and Policy-SPF. Added systemd init script.
 
 Get it from:
 
@@ -73,6 +75,9 @@ Installation
 
 See the file mailgraph-init for an example init script that you can use to
 start mailgraph at system boot.
+
+If you are useing a systemd machine, see mailgraph-systemd for an example init
+script you can use to start mailgraph at system boot.
 
 You need to put mailgraph.cgi on somewhere accessible though a web-server, it
 needs to be executeable and the web-server needs to execute it as a CGI.
