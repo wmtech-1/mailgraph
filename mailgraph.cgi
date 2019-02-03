@@ -12,17 +12,17 @@ use POSIX qw(uname);
 my $VERSION = "1.14";
 
 my $host = (POSIX::uname())[1];
-my $scriptname = 'mailgraph-dmarc.cgi';
-my $xpoints = 850;
+my $scriptname = 'mailgraph.cgi';
+my $xpoints = 540;
 my $points_per_sample = 3;
-my $ypoints = 350;
+my $ypoints = 160;
 my $ypoints_spf = 96;
 my $ypoints_err = 96;
 my $ypoints_dmarc = 96;
 my $ypoints_dkim = 96;
-my $rrd = '/usr/share/rrdtool/mailgraph-dmarc.rrd'; # path to where the RRD database is
-my $rrd_virus = '/usr/share/rrdtool/mailgraph-dmarc_virus.rrd'; # path to where the Virus RRD database is
-my $tmp_dir = '/tmp/mailgraph-dmarc'; # temporary directory where to store the images
+my $rrd = 'mailgraph.rrd'; # path to where the RRD database is
+my $rrd_virus = 'mailgraph_virus.rrd'; # path to where the Virus RRD database is
+my $tmp_dir = '/tmp/mailgraph'; # temporary directory where to store the images
 
 my @graphs = (
         { title => 'Last Hour',   seconds => 3600,        },
@@ -343,9 +343,9 @@ sub send_image($)
                 exit 1;
         };
 
-        print "Content-type: image/png\n";
-        print "Content-length: ".((stat($file))[7])."\n";
-        print "\n";
+        print "Content-type: image/png\n" unless $ARGV[0];
+        print "Content-length: ".((stat($file))[7])."\n" unless $ARGV[0];
+        print "\n" unless $ARGV[0];
         open(IMG, $file) or die;
         my $data;
         print $data while read(IMG, $data, 16384)>0;
