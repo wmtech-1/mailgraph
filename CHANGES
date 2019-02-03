@@ -1,4 +1,5 @@
 1.16 (2019-02-03)
+-----------------
 * Fixes for Postfix 3.0 compatibility (WMTech)
 * Added systemd init script example (WMTech)
 * Added OpenDKIM monitoring & Plotting (Sebastian van de Meer - kernel-error_at_kernel-error.de)
