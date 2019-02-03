@@ -1,0 +1,30 @@
+# Copy the file as "/etc/systemd/system/mailgraph.service"
+# To run mailgraph, use:
+#       systemctl start mailgraph.service
+# to enable automatic start at boot time, use:
+#       systemctl enable mailgraph.service
+# to stop mailgraph:
+#       systemctl stop mailgraph.service
+#
+# For more info about custom unit files, see
+# http://fedoraproject.org/wiki/Systemd#How_do_I_customize_a_unit_file.2F_add_a_custom_unit_file.3F
+[Unit]
+Description=Mailgraph a postfix grapher
+Requires=nginx.service
+After=nginx.service
+
+[Service]
+Type=forking
+Environment=MAILGRAPH=/usr/local/bin/mailgraph.pl
+Environment=MAILLOG=/var/log/syslog
+Environment=RRDDIR=/var/lib
+Environment=PIDFILE=/var/run/mailgraph.pid
+PIDFILE=/var/run/mailgraph.pid
+ExecStart=/usr/bin/nice -19 ${MAILGRAPH} -l ${MAILLOG} -d --daemon-pid=${PIDFILE} --daemon-rrd=${RRDDIR}
+ExecReload=/usr/bin/kill -HUP $MAINPID
+ExecStop=/usr/bin/bash -c "/usr/bin/kill -TERM `/usr/bin/cat ${PIDFILE}`"
+ExecStopPost=/usr/bin/rm ${PIDFILE}
+KillMode=control-group
+
+[Install]
+WantedBy=multi-user.target
