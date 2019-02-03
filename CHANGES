@@ -1,3 +1,9 @@
+1.16 (2019-02-03)
+* Fixes for Postfix 3.0 compatibility (WMTech)
+* Added OpenDKIM monitoring & Plotting (Sebastian van de Meer - kernel-error_at_kernel-error.de)
+* Added OpenDMARC monitoring & plotting (Sebastian van de Meer - kernel-error_at_kernel-error.de)
+* Added Policy-SPC monitoring & plotting (Sebastian van de Meer - kernel-error_at_kernel-error.de)
+
 1.15 (UNRELEASED)
 -----------------
 * sendmail fixes (David Caldwell)
